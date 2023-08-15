@@ -3,10 +3,6 @@ const TokenType = {
   NUMBER: "NUMBER",
   ADD: "ADD",
   SUB: "SUB",
-  MUL: "MUL",
-  DIV: "DIV",
-  LPAREN: "LPAREN",
-  RPAREN: "RPAREN",
   EOF: "EOF",
 };
 
@@ -46,18 +42,6 @@ class Lexer {
         case "-":
           this.pos++;
           return new Token(TokenType.SUB, char);
-        case "*":
-          this.pos++;
-          return new Token(TokenType.MUL, char);
-        case "/":
-          this.pos++;
-          return new Token(TokenType.DIV, char);
-        case "(":
-          this.pos++;
-          return new Token(TokenType.LPAREN, char);
-        case ")":
-          this.pos++;
-          return new Token(TokenType.RPAREN, char);
         default:
           throw new Error("Caracter no reconocido: " + char);
       }
@@ -121,7 +105,7 @@ class Calculator {
 
 // Prueba del analizador léxico y calculadora
 function testCalculator() {
-  var input = "2 + 2 ";
+  var input = "2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 + 2";
   var lexer = new Lexer(input);
 
   let token = lexer.getNextToken();
@@ -132,8 +116,6 @@ function testCalculator() {
 
   var calculator = new Calculator(input);
   console.log("Resultado: ", calculator.calculate());
-
-
 
   input = "10 - 5 ";
   lexer = new Lexer(input);
